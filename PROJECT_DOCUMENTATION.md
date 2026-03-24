@@ -39,6 +39,7 @@ The project was built to satisfy the following goals:
 ### Backend
 
 - Python 3.11
+- Django
 - Flask 3.x
 - SQLite
 - Werkzeug security helpers

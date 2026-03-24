@@ -64,7 +64,7 @@ A professional Flask-based web application for registering trusted file fingerpr
 <a id="demo"></a>
 ## 🌐 Demo
 
-Live demo placeholder: https://your-app-name.onrender.com
+Live demo placeholder: https://file-integrity-z8xz.onrender.com
 
 ---
 

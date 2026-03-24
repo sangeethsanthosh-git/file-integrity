@@ -368,6 +368,28 @@ def verify_file(file_id: int):
         session["verification_feedback"] = feedback
         feedback = None
 
+    history_rows = get_db().execute(
+        """
+        SELECT id, old_hash, new_hash, result, timestamp
+        FROM verification_logs
+        WHERE file_id = ?
+        ORDER BY timestamp DESC, id DESC
+        LIMIT 5
+        """,
+        (file_id,),
+    ).fetchall()
+
+    recent_history = [
+        {
+            "id": row["id"],
+            "old_hash": shorten_hash(decrypt_hash_value(row["old_hash"])),
+            "new_hash": shorten_hash(decrypt_hash_value(row["new_hash"])),
+            "result": row["result"],
+            "timestamp": row["timestamp"],
+        }
+        for row in history_rows
+    ]
+
     return render_template(
         "verify.html",
         tracked_file={
@@ -377,14 +399,48 @@ def verify_file(file_id: int):
             "hash_display": shorten_hash(stored_hash),
         },
         feedback=feedback,
+        recent_history=recent_history,
     )
 
 
 @app.route("/history/<int:file_id>")
 @login_required
 def history(file_id: int):
-    get_user_file(file_id)
-    return redirect(url_for("verify_file", file_id=file_id))
+    tracked_file = get_user_file(file_id)
+    history_rows = get_db().execute(
+        """
+        SELECT id, old_hash, new_hash, result, timestamp
+        FROM verification_logs
+        WHERE file_id = ?
+        ORDER BY timestamp DESC, id DESC
+        """,
+        (file_id,),
+    ).fetchall()
+
+    history_entries = [
+        {
+            "id": row["id"],
+            "old_hash": shorten_hash(decrypt_hash_value(row["old_hash"])),
+            "new_hash": shorten_hash(decrypt_hash_value(row["new_hash"])),
+            "result": row["result"],
+            "result_message": "File Verified – No Changes Detected"
+            if row["result"] == "match"
+            else "Warning: File Modified",
+            "timestamp": row["timestamp"],
+        }
+        for row in history_rows
+    ]
+
+    return render_template(
+        "history.html",
+        tracked_file={
+            "id": tracked_file["id"],
+            "file_name": tracked_file["file_name"],
+            "upload_time": tracked_file["upload_time"],
+            "hash_display": shorten_hash(decrypt_hash_value(tracked_file["hash_value"])),
+        },
+        history_entries=history_entries,
+    )
 
 
 @app.errorhandler(413)

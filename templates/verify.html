@@ -54,4 +54,47 @@
         </div>
     </section>
 {% endif %}
+
+<!-- Hidden for client version. Remove this block to restore history UI -->
+<!-- HISTORY FEATURE TEMPORARILY HIDDEN FOR CLIENT
+<section class="card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">Recent Checks</p>
+            <h2>Latest verification history</h2>
+        </div>
+    </div>
+
+    {% if recent_history %}
+        <div class="timeline">
+            {% for entry in recent_history %}
+                <article class="timeline-item">
+                    <div class="timeline-marker timeline-marker-{{ entry.result }}"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-head">
+                            <h3>{{ "Matched Original" if entry.result == "match" else "Mismatch Detected" }}</h3>
+                            <span>{{ entry.timestamp }}</span>
+                        </div>
+                        <div class="hash-compare-grid compact">
+                            <div class="hash-compare-item">
+                                <span>Stored Hash</span>
+                                <code>{{ entry.old_hash }}</code>
+                            </div>
+                            <div class="hash-compare-item">
+                                <span>New Hash</span>
+                                <code>{{ entry.new_hash }}</code>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h3>No verification history yet</h3>
+            <p>Your first comparison result will appear here after you run a verification.</p>
+        </div>
+    {% endif %}
+</section>
+END HISTORY FEATURE -->
 {% endblock %}
