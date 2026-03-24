@@ -420,11 +420,19 @@ h3 {
     font-weight: 700;
 }
 
+
+
 .detail-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
     align-items: start;
+}
+
+.detail-grid > .card:only-child {
+    grid-column: 1 / -1;
+    width: min(100%, 680px);
+    justify-self: center;
 }
 
 .stats-grid {
