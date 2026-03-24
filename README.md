@@ -39,12 +39,12 @@ A professional Flask web application for storing trusted file fingerprints, comp
 > Replace these placeholders with your final project screenshots if needed.
 
 ![Login](docs/images/login.png)
-![Dashboard](docs/images/dashboard.png)
-![Verify](docs/images/verify.png)
+![Dashboard](docs/images/dash.png)
+![Verify](docs/images/result2.png)
 
 ## 🌐 Demo
 
-Live demo placeholder: `https://your-render-app.onrender.com`
+Live demo placeholder: `https://file-integrity-z8xz.onrender.com`
 
 ## ⚙️ Installation
 
