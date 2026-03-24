@@ -3,28 +3,22 @@
 {% block title %}Login | IntegrityVault{% endblock %}
 
 {% block content %}
-<section class="auth-form-only auth-container">
-    <div class="form-panel">
-        <div class="card auth-card">
-            <p class="eyebrow">Sign In</p>
-            <h2>Welcome back</h2>
-            <p class="supporting-copy">Use your account to continue monitoring file integrity.</p>
+<section class="auth-container">
+    <div class="card auth-card">
+        <form method="post" class="stacked-form auth-form" novalidate>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" maxlength="32" value="{{ request.form.get('username', '') }}" required>
 
-            <form method="post" class="stacked-form auth-form" novalidate>
-                <label for="username">Username</label>
-                <input id="username" name="username" type="text" maxlength="32" value="{{ request.form.get('username', '') }}" required>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required>
 
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password" required>
+            <button type="submit" class="primary-button btn-primary">Login</button>
+        </form>
 
-                <button type="submit" class="primary-button btn-primary">Login</button>
-            </form>
-
-            <p class="inline-note">
-                Need an account?
-                <a href="{{ url_for('register') }}">Create one here</a>.
-            </p>
-        </div>
+        <p class="inline-note">
+            Need an account?
+            <a href="{{ url_for('register') }}">Create one here</a>.
+        </p>
     </div>
 </section>
 {% endblock %}

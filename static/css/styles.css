@@ -346,19 +346,10 @@ h3 {
     color: var(--muted);
 }
 
-.auth-form-only,
 .auth-container {
-    display: grid;
-    justify-items: center;
-    align-content: start;
-    min-height: calc(100vh - 220px);
-}
-
-.form-panel {
     display: flex;
-    width: min(100%, 560px);
-    max-width: 100%;
     justify-content: center;
+    width: 100%;
 }
 
 .card,
@@ -372,9 +363,9 @@ h3 {
     box-shadow: var(--shadow);
 }
 
-.auth-form-only .card,
 .auth-card {
     width: min(100%, 520px);
+    margin-top: 20px;
 }
 
 .card,
@@ -770,8 +761,6 @@ h3 {
 
 @media (max-width: 768px) {
     .auth-container {
-        min-height: auto;
-        align-items: flex-start;
         padding-top: 20px;
     }
 
@@ -825,14 +814,6 @@ h3 {
         grid-template-columns: 1fr;
     }
 
-    .auth-form-only {
-        min-height: auto;
-    }
-
-    .form-panel,
-    .auth-form-only .card {
-        width: 100%;
-    }
 
     .card,
     .stat-card,
@@ -958,3 +939,4 @@ h3 {
         padding: 1rem;
     }
 }
+
