@@ -346,7 +346,8 @@ h3 {
     color: var(--muted);
 }
 
-.auth-form-only {
+.auth-form-only,
+.auth-container {
     display: grid;
     justify-items: center;
     align-content: start;
@@ -371,7 +372,8 @@ h3 {
     box-shadow: var(--shadow);
 }
 
-.auth-form-only .card {
+.auth-form-only .card,
+.auth-card {
     width: min(100%, 520px);
 }
 
@@ -385,6 +387,10 @@ h3 {
     gap: 0.8rem;
     margin-top: 1rem;
     width: 100%;
+}
+
+.auth-form {
+    gap: 12px;
 }
 
 .stacked-form label {
@@ -763,6 +769,25 @@ h3 {
 }
 
 @media (max-width: 768px) {
+    .auth-container {
+        min-height: auto;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+    .auth-card {
+        margin-top: 10px;
+        padding: 18px;
+    }
+
+    .logo {
+        margin-bottom: 12px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
     .container {
         padding: 16px;
     }

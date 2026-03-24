@@ -3,14 +3,14 @@
 {% block title %}Register | IntegrityVault{% endblock %}
 
 {% block content %}
-<section class="auth-form-only">
+<section class="auth-form-only auth-container">
     <div class="form-panel">
-        <div class="card">
+        <div class="card auth-card">
             <p class="eyebrow">Register</p>
             <h2>Create your workspace</h2>
             <p class="supporting-copy">Choose a username and a strong password to begin.</p>
 
-            <form method="post" class="stacked-form" novalidate>
+            <form method="post" class="stacked-form auth-form" novalidate>
                 <label for="username">Username</label>
                 <input id="username" name="username" type="text" maxlength="32" value="{{ request.form.get('username', '') }}" required>
 
@@ -20,7 +20,7 @@
                 <label for="confirm_password">Confirm Password</label>
                 <input id="confirm_password" name="confirm_password" type="password" minlength="8" required>
 
-                <button type="submit" class="primary-button">Create Account</button>
+                <button type="submit" class="primary-button btn-primary">Create Account</button>
             </form>
 
             <p class="inline-note">
