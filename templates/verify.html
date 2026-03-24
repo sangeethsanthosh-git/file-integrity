@@ -1,47 +1,19 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Verify File | IntegrityVault{% endblock %}
 
 {% block content %}
-<section class="page-header">
-    <div>
-        <p class="eyebrow">Verify</p>
-        <h1>Compare a fresh upload against the stored fingerprint.</h1>
-        <p class="supporting-copy">Re-upload the file to confirm whether it is original or modified.</p>
-    </div>
-    <div class="header-actions">
-        <a class="ghost-button" href="{{ url_for('history', file_id=tracked_file.id) }}">View History</a>
-        <a class="ghost-button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
-    </div>
-</section>
-
-{% if feedback %}
-    <section class="result-banner result-{{ feedback.result }}">
-        <div>
-            <p class="eyebrow">Latest Result</p>
-            <h2>{{ feedback.message }}</h2>
-            <p class="supporting-copy">Checked on {{ feedback.timestamp }}</p>
-        </div>
-        <div class="hash-compare-grid">
-            <div class="hash-compare-item">
-                <span>Stored Hash</span>
-                <code>{{ feedback.old_hash }}</code>
-            </div>
-            <div class="hash-compare-item">
-                <span>New Hash</span>
-                <code>{{ feedback.new_hash }}</code>
-            </div>
-        </div>
-    </section>
-{% endif %}
-
 <section class="detail-grid">
     <article class="card info-card">
         <p class="eyebrow">Tracked File</p>
-        <h2>{{ tracked_file.file_name }}</h2>
+        <h1>{{ tracked_file.file_name }}</h1>
         <dl class="detail-list">
             <div>
-                <dt>Uploaded On</dt>
+                <dt>Tracked File Name</dt>
+                <dd>{{ tracked_file.file_name }}</dd>
+            </div>
+            <div>
+                <dt>Uploaded Timestamp</dt>
                 <dd>{{ tracked_file.upload_time }}</dd>
             </div>
             <div>
@@ -52,8 +24,8 @@
     </article>
 
     <article class="card">
-        <p class="eyebrow">Run Verification</p>
-        <h2>Upload the comparison file</h2>
+        <p class="eyebrow">Verify</p>
+        <h2>Upload Comparison File</h2>
         <form method="post" enctype="multipart/form-data" class="stacked-form">
             <div class="file-picker">
                 <input
@@ -74,43 +46,12 @@
     </article>
 </section>
 
-<section class="card">
-    <div class="section-head">
+{% if feedback %}
+    <section class="result-banner result-{{ feedback.result }}">
         <div>
-            <p class="eyebrow">Recent Checks</p>
-            <h2>Latest verification history</h2>
+            <p class="eyebrow">Verification Result</p>
+            <h2>{{ feedback.message }}</h2>
         </div>
-    </div>
-
-    {% if recent_history %}
-        <div class="timeline">
-            {% for entry in recent_history %}
-                <article class="timeline-item">
-                    <div class="timeline-marker timeline-marker-{{ entry.result }}"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-head">
-                            <h3>{{ "Matched Original" if entry.result == "match" else "Mismatch Detected" }}</h3>
-                            <span>{{ entry.timestamp }}</span>
-                        </div>
-                        <div class="hash-compare-grid compact">
-                            <div class="hash-compare-item">
-                                <span>Stored Hash</span>
-                                <code>{{ entry.old_hash }}</code>
-                            </div>
-                            <div class="hash-compare-item">
-                                <span>New Hash</span>
-                                <code>{{ entry.new_hash }}</code>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="empty-state">
-            <h3>No verification history yet</h3>
-            <p>Your first comparison result will appear here after you run a verification.</p>
-        </div>
-    {% endif %}
-</section>
+    </section>
+{% endif %}
 {% endblock %}
