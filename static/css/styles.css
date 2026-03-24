@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --bg: #f4efe7;
     --bg-panel: rgba(255, 251, 245, 0.92);
     --line: rgba(54, 72, 83, 0.12);
@@ -271,6 +271,11 @@ h3 {
     gap: 1.5rem;
 }
 
+.auth-form-only {
+    display: grid;
+    justify-items: center;
+}
+
 .hero-panel,
 .card,
 .stat-card,
@@ -322,6 +327,10 @@ h3 {
 
 .form-panel {
     display: flex;
+}
+
+.auth-form-only .card {
+    width: min(100%, 480px);
 }
 
 .card,
