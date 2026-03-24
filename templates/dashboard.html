@@ -1,16 +1,10 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Dashboard | IntegrityVault{% endblock %}
 
 {% block content %}
-<section class="page-header">
-    <div>
-        <p class="eyebrow">Dashboard</p>
-        <h1>Track and verify your uploaded files.</h1>
-        <p class="supporting-copy">
-            Verified and modified counts are based on each file's latest verification result.
-        </p>
-    </div>
+<section class="page-toolbar">
+    <h1>Dashboard</h1>
     <a class="primary-button" href="{{ url_for('upload_file') }}">Upload New File</a>
 </section>
 
