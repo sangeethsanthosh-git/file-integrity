@@ -10,30 +10,14 @@
 <body>
     <div class="site-bg"></div>
     <div class="page-shell container">
-        <header class="topbar">
-            <a class="brand logo" href="{{ url_for('dashboard') if g.user else url_for('login') }}">
-                <span class="brand-mark">IV</span>
-                <span>
-                    <strong>IntegrityVault</strong>
-                    <small>File Integrity Verification System</small>
-                </span>
-            </a>
-
-            <nav class="topbar-nav" aria-label="Primary">
-                {% if g.user %}
-                    <span class="user-badge">{{ g.user['username'] }}</span>
-                    <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-                    <a class="nav-link" href="{{ url_for('upload_file') }}">Upload</a>
-                    <a class="nav-link nav-link-strong" href="{{ url_for('logout') }}">Logout</a>
-                {% else %}
-                    {% if request.path != url_for('login') %}
-                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                    {% endif %}
-                    {% if request.path != url_for('register') %}
-                        <a class="nav-link nav-link-strong" href="{{ url_for('register') }}">Register</a>
-                    {% endif %}
-                {% endif %}
-            </nav>
+        <header class="app-header">
+            <div class="app-title">
+                <span class="logo">IV</span>
+                <div>
+                    <h1>IntegrityVault</h1>
+                    <p>File Integrity Verification System</p>
+                </div>
+            </div>
         </header>
 
         <main class="main-content">
