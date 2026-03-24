@@ -40,7 +40,7 @@ app = Flask(
     template_folder=str(TEMPLATES_DIR),
     static_folder=str(STATIC_DIR),
 )
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "change-this-secret-key")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "i_Am_BaTmAn")
 app.config["DATABASE"] = str(DATABASE_PATH)
 app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
 app.config["HASH_CHUNK_SIZE"] = 4096
