@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Upload | IntegrityVault{% endblock %}
 
@@ -11,7 +11,9 @@
             Any file type is accepted. The app reads the upload in 4096-byte chunks and stores only metadata plus the SHA-256 hash.
         </p>
     </div>
-    <a class="ghost-button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <div class="header-actions">
+        <a class="ghost-button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </div>
 </section>
 
 <section class="detail-grid">
