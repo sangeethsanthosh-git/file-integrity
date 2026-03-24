@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}IntegrityVault{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+    <div class="site-bg"></div>
+    <div class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="{{ url_for('dashboard') if g.user else url_for('login') }}">
+                <span class="brand-mark">IV</span>
+                <span>
+                    <strong>IntegrityVault</strong>
+                    <small>File Integrity Verification System</small>
+                </span>
+            </a>
+
+            <nav class="topbar-nav">
+                {% if g.user %}
+                    <span class="user-badge">{{ g.user['username'] }}</span>
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a class="nav-link" href="{{ url_for('upload_file') }}">Upload</a>
+                    <a class="nav-link nav-link-strong" href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-link nav-link-strong" href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </nav>
+        </header>
+
+        <main class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <section class="alerts" aria-live="polite">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}" data-alert>
+                                <span>{{ message }}</span>
+                                <button type="button" class="alert-close" aria-label="Dismiss message">&times;</button>
+                            </div>
+                        {% endfor %}
+                    </section>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

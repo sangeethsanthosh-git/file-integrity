@@ -1,0 +1,52 @@
+﻿{% extends "base.html" %}
+
+{% block title %}History | IntegrityVault{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">History</p>
+        <h1>Verification history for {{ tracked_file.file_name }}</h1>
+        <p class="supporting-copy">
+            Original hash: <code class="hash-pill">{{ tracked_file.hash_display }}</code>
+        </p>
+    </div>
+    <div class="header-actions">
+        <a class="ghost-button" href="{{ url_for('verify_file', file_id=tracked_file.id) }}">Verify Again</a>
+        <a class="ghost-button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </div>
+</section>
+
+<section class="card">
+    {% if history_entries %}
+        <div class="timeline">
+            {% for entry in history_entries %}
+                <article class="timeline-item">
+                    <div class="timeline-marker timeline-marker-{{ entry.result }}"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-head">
+                            <h2>{{ entry.result_message }}</h2>
+                            <span>{{ entry.timestamp }}</span>
+                        </div>
+                        <div class="hash-compare-grid compact">
+                            <div class="hash-compare-item">
+                                <span>Stored Hash</span>
+                                <code>{{ entry.old_hash }}</code>
+                            </div>
+                            <div class="hash-compare-item">
+                                <span>New Hash</span>
+                                <code>{{ entry.new_hash }}</code>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h3>No verification records yet</h3>
+            <p>Run a verification to create a timeline entry for this file.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

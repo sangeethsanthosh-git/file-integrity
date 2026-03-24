@@ -1,0 +1,50 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Upload | IntegrityVault{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Upload</p>
+        <h1>Register a file for integrity tracking.</h1>
+        <p class="supporting-copy">
+            Any file type is accepted. The app reads the upload in 4096-byte chunks and stores only metadata plus the SHA-256 hash.
+        </p>
+    </div>
+    <a class="ghost-button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</section>
+
+<section class="detail-grid">
+    <article class="card info-card">
+        <p class="eyebrow">How It Works</p>
+        <h2>Upload once, verify anytime.</h2>
+        <ul class="simple-list">
+            <li>The uploaded file is hashed with SHA-256.</li>
+            <li>The original file name, upload time, and hash metadata are stored in SQLite.</li>
+            <li>Future verification checks compare a new upload against the stored fingerprint.</li>
+        </ul>
+    </article>
+
+    <article class="card">
+        <p class="eyebrow">New Upload</p>
+        <h2>Select a file</h2>
+        <form method="post" enctype="multipart/form-data" class="stacked-form">
+            <div class="file-picker">
+                <input
+                    id="file"
+                    name="file"
+                    type="file"
+                    required
+                    data-file-input
+                >
+                <label for="file" class="file-picker-label">
+                    <span class="file-picker-title">Choose a file</span>
+                    <span class="file-picker-text" data-file-display="file">No file selected</span>
+                </label>
+            </div>
+
+            <button type="submit" class="primary-button">Generate Hash &amp; Save</button>
+        </form>
+    </article>
+</section>
+{% endblock %}

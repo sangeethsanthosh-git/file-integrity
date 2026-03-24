@@ -1,0 +1,55 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Register | IntegrityVault{% endblock %}
+
+{% block content %}
+<section class="auth-layout">
+    <div class="hero-panel alt">
+        <p class="eyebrow">Create Account</p>
+        <h1>Start tracking trusted file signatures.</h1>
+        <p class="hero-copy">
+            Register once, upload any file type, and build a private verification record for documents, media, archives, and more.
+        </p>
+        <div class="feature-list">
+            <div class="feature-item">
+                <strong>Session-Based Access</strong>
+                <span>Protected routes keep file metadata scoped to your own account.</span>
+            </div>
+            <div class="feature-item">
+                <strong>Smart Verification History</strong>
+                <span>Every check is recorded with old and new hash snapshots.</span>
+            </div>
+            <div class="feature-item">
+                <strong>Responsive Interface</strong>
+                <span>Clean layouts work across desktop, tablet, and mobile screens.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <div class="card">
+            <p class="eyebrow">Register</p>
+            <h2>Create your workspace</h2>
+            <p class="supporting-copy">Choose a username and a strong password to begin.</p>
+
+            <form method="post" class="stacked-form" novalidate>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" maxlength="32" value="{{ request.form.get('username', '') }}" required>
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" minlength="8" required>
+
+                <label for="confirm_password">Confirm Password</label>
+                <input id="confirm_password" name="confirm_password" type="password" minlength="8" required>
+
+                <button type="submit" class="primary-button">Create Account</button>
+            </form>
+
+            <p class="inline-note">
+                Already registered?
+                <a href="{{ url_for('login') }}">Log in instead</a>.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

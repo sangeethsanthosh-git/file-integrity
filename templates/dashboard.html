@@ -1,0 +1,86 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Dashboard | IntegrityVault{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Dashboard</p>
+        <h1>Track and verify your uploaded files.</h1>
+        <p class="supporting-copy">
+            Verified and modified counts are based on each file's latest verification result.
+        </p>
+    </div>
+    <a class="primary-button" href="{{ url_for('upload_file') }}">Upload New File</a>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <span>Total Files</span>
+        <strong>{{ stats.total_files }}</strong>
+        <small>Files currently tracked in your account.</small>
+    </article>
+    <article class="stat-card">
+        <span>Verified Files</span>
+        <strong>{{ stats.verified_files }}</strong>
+        <small>Files whose latest verification matched the original hash.</small>
+    </article>
+    <article class="stat-card">
+        <span>Modified Files</span>
+        <strong>{{ stats.modified_files }}</strong>
+        <small>Files whose latest verification detected a mismatch.</small>
+    </article>
+</section>
+
+<section class="card table-card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">Tracked Files</p>
+            <h2>Your verification inventory</h2>
+        </div>
+    </div>
+
+    {% if files %}
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Hash</th>
+                        <th>Status</th>
+                        <th>Last Checked</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                        <tr>
+                            <td>
+                                <strong>{{ file.file_name }}</strong>
+                                <span class="table-subtext">Uploaded {{ file.upload_time }}</span>
+                            </td>
+                            <td><code class="hash-pill">{{ file.hash_display }}</code></td>
+                            <td>
+                                <span class="status-badge status-{{ file.status_class }}">
+                                    {{ file.status_text }}
+                                </span>
+                            </td>
+                            <td>{{ file.last_checked or "Not checked yet" }}</td>
+                            <td class="actions-cell">
+                                <a class="secondary-button" href="{{ url_for('verify_file', file_id=file.id) }}">Verify</a>
+                                <a class="ghost-button" href="{{ url_for('history', file_id=file.id) }}">History</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h3>No files uploaded yet</h3>
+            <p>Upload your first file to generate its SHA-256 fingerprint and start verification tracking.</p>
+            <a class="primary-button" href="{{ url_for('upload_file') }}">Upload a File</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
