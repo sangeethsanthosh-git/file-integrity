@@ -59,7 +59,7 @@ svg {
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: auto;
     padding: 20px;
 }
