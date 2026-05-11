@@ -8,7 +8,8 @@
 
 A professional Flask web application for storing trusted file fingerprints, comparing uploaded files with SHA-256, and helping users quickly confirm whether a file has been modified.
 
-![Project Banner Placeholder](https://via.placeholder.com/1200x320.png?text=File+Integrity+Verification+System+Banner)
+## 🌐 View Live
+https://file-integrity-z8xz.onrender.com
 
 ## 📚 Table of Contents
 
@@ -42,9 +43,7 @@ A professional Flask web application for storing trusted file fingerprints, comp
 ![Dashboard](docs/images/dash.png)
 ![Verify](docs/images/result2.png)
 
-## 🌐 Demo
 
-Live demo placeholder: `https://file-integrity-z8xz.onrender.com`
 
 ## ⚙️ Installation
 
