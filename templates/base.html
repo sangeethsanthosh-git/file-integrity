@@ -18,6 +18,14 @@
                     <p>File Integrity Verification System</p>
                 </div>
             </div>
+            {% if g.user %}
+                <nav class="app-nav" aria-label="Primary navigation">
+                    <span class="user-badge">{{ g.user.username }}</span>
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a class="nav-link" href="{{ url_for('upload_file') }}">Upload</a>
+                    <a class="ghost-button" href="{{ url_for('logout') }}">Logout</a>
+                </nav>
+            {% endif %}
         </header>
 
         <main class="main-content">
